@@ -6,7 +6,7 @@
 #define HIDDEN_SIZE 3
 #define OUTPUT_SIZE 1
 #define LEARNING_RATE 0.1
-#define GENERATIONS
+#define GENERATIONS 3
 
 
 struct neuron
@@ -117,7 +117,7 @@ int main()
 
 		double error = Loss_func(target, o_layer);
 
-		printf("%f/n", error);
+		printf("%f\n", error);
 
 //début de la descente de gradients
 
