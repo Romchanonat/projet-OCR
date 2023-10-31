@@ -1,24 +1,18 @@
-# Makefile
+CPP	= gcc
+CFLAGS  = `sdl-config --cflags`
+LIBS	= `sdl-config --libs` -lm -lSDL_image
+EXEC	= main
 
-CC = gcc
-CPPFLAGS =
-CFLAGS = -Wall -Wextra -O3 `pkg-config --cflags sdl2 SDL2_image`
-LDFLAGS =
-LDLIBS = `pkg-config --libs sdl2 SDL2_image`
+all: ${EXEC}
 
-all: main filter
+${EXEC}: ${EXEC}.o
+	${CPP} ${EXEC}.c filter.c $(CFLAGS) ${LIBS} -o Filtrage_Image
+# 	${CPP} $(CFLAGS) -o ${EXEC} ${EXEC}.o ${LDFLAGS}
+# ${EXEC}.o: ${EXEC}.c
+# 	${CPP} ${EXEC}.c traitements.c $(CFLAGS) -o ${EXEC}.o
+# 	${CPP} $(CFLAGS) -o ${EXEC}.o -c ${EXEC}.c traitements.c
+clean:	
+	rm -fr *.o
 
-SRC = main.c filter.c
-OBJ = ${SRC:.c=.o}
-EXE = ${SRC:.c=}
-
-main: main.o
-filtres: filter.o
-
-.PHONY: clean
-
-clean:
-	${RM} ${OBJ}
-	${RM} ${EXE}
-
-# END
+mrproper: clean
+	rm -fr ${EXEC}

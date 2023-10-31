@@ -45,7 +45,7 @@ void event_loop(SDL_Renderer* renderer, SDL_Texture* texture)
     }
 }
 
-int main(int argc, char ** argv)
+int main(int argc, char** argv)
 {
     // Checks the number of arguments.
     if (argc != 2)
