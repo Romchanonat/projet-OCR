@@ -6,7 +6,7 @@ CFLAGS = -Wall -Wextra
 LDFLAGS =
 LDLIBS =
 
-SRC = solver.c 
+SRC = main.c 
 OBJ = ${SRC:.txt=.result}
 DEP = ${SRC:.c=.d}
 
@@ -17,9 +17,7 @@ solver: ${SRC}
 .PHONY: clean
 
 clean:
-	${RM} ${OBJ}
 	${RM} ${DEP}
-	${RM} solver
 	${RM} a.out
 
 # END

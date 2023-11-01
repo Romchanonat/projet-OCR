@@ -1,0 +1,37 @@
+J'ai fait un premier fichier.c appalé main.c où j'ai suivi la video que je t'ai envoyé en lien. 
+
+Sauf que le problème, c'est que ça prend un fichier dans lequel il est écris un truc comme ça : 
+
+   456      789            234567   567         234      678         345   345678
+
+Ce fichier comprend 81 caractère plus le '\0' à la fin
+
+Or nous nous souhaitons prendre un fichier de ce format:
+... 456 ...
+... 789 ...
+... ... ...
+
+234 567 ...
+567 ... ...
+... 234 ...
+
+... 678 ...
+... ... 345
+... 345 678
+
+
+Donc j'ai créé un nouveau fichier.c : solver.c dans lequel j'ai apporté des modifcations. La ligne du sudoku ne fait plus 9 mais 12 avec les espaces et les retours à la ligne. Le fichier sudoku.txt sudoku2 et sudoku3 sont des sudoku à résoudre. 
+
+Pour pouvoir tester, exécute cette commande :  gcc solver.c && ./a.out sudoku2
+
+En sachant que tu changes le fichier.c et le sudoku en fonction de ce que tu veux tester. 
+
+Pour pouvoir débuguer, tu dois faire ça: 
+
+gcc solver.c -g
+gdb --args ./a.out sudoku2
+
+Ensuite tu rentres : "focus"
+puis pour mettre un point break : b .. avec .. la ligne où tu veux le mettre
+Appuye sur n si tu veux aller à la ligne suivante et sur s si tu veux aller dans l'appel à une fonction qui sur trouve sur la ligne.
+

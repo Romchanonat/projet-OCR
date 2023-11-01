@@ -18,8 +18,8 @@
 
 int is_line_ok(int nb, int line, char s[])
 {
-	int pos = line * 12;
-	int lim = pos + 12;
+	int pos = line * 9;
+	int lim = pos + 9;
 
 	//cette fonction vérifie que le nombre n'est pas déjà dans la ligne 
 	while(pos < lim)
@@ -34,13 +34,13 @@ int is_line_ok(int nb, int line, char s[])
 int is_col_ok(int nb, int col, char s[])
 {
 	int pos = col;
-	int lim = 131;
+	int lim = 81;
 
 	//cette fonction vérifie que le nombre n'est pas déjà dans la colonne
 	while(pos < lim)
 	{
 		if(s[pos] == nb) return 0;
-		pos += 12;
+		pos += 9;
 	}
 	return 1;
 }
@@ -59,7 +59,7 @@ int is_square_ok(int nb, int line, int col, char s[])
 	{
 		while(col < col_lim)
 		{
-			if(s[line * 12 + col] == nb) return (0);
+			if(s[line * 9 + col] == nb) return (0);
 			col ++;
 		}
 		col = save;
@@ -71,7 +71,7 @@ int is_square_ok(int nb, int line, int col, char s[])
 
 int is_empty(int pos, char s[])
 {
-	if(s[pos] == '.') return 1;
+	if(s[pos] == ' ') return 1;
 	else return 0;
 }
 
@@ -79,9 +79,8 @@ int is_empty(int pos, char s[])
 int sudoku(int pos, int empty, char s[])
 {
 	//fin du sudoku
-	if(pos == 131) return 0;
+	if(pos == 81) return 0;
 
-	if(s[pos] == ' ') return (sudoku(pos + 1, is_empty(pos + 1, s), s));
 	//test : case déjà complété
 	if(empty == 0) return (sudoku(pos + 1, is_empty(pos + 1, s), s));
 	//remplissage de la case
@@ -92,11 +91,11 @@ int sudoku(int pos, int empty, char s[])
 
 		while(sol_pos < 9)
 		{
-			if(is_line_ok(sol[sol_pos], pos / 12, s) == 1 && is_col_ok(sol[sol_pos], pos % 12, s) == 1 && is_square_ok(sol[sol_pos], pos /12, pos % 12, s) == 1)
+			if(is_line_ok(sol[sol_pos], pos / 9, s) == 1 && is_col_ok(sol[sol_pos], pos % 9, s) == 1 && is_square_ok(sol[sol_pos], pos /9, pos % 9, s) == 1)
 			{
 				s[pos] = sol[sol_pos];
 				if(sudoku(pos + 1, is_empty(pos + 1, s), s) == 0) return 0;
-				else s[pos] = '.';
+				else s[pos] = ' ';
 			}
 			sol_pos ++;
 		}
@@ -113,7 +112,7 @@ void print_sudoku(char s[])
 	int pos = 0;
 
 	//Test compteur contenue dans le sudoku
-	while(count < 108)
+	while(count < 81)
 	{
 		if(count != 0)
 		{
@@ -124,9 +123,15 @@ void print_sudoku(char s[])
 				pos += 13;
 			}
 			// ce modulo correspond aux différents carré
-			else if(count % 12 == 0)
+			else if(count % 9 == 0)
 			{
 				memcpy(&display[pos], "\n", 1);
+				pos += 1;
+			}
+			// ce cas correspond aux cases 3par3
+			else if(count % 3 == 0)
+			{
+				memcpy(&display[pos], " | ", 1);
 				pos += 1;
 			}
 		}
@@ -155,14 +160,14 @@ void error(char *av, char s[])
 		printf("Incorrect line size\n");
 		exit(1);
 	}
-	s[108] = 0;
+	s[81] = 0;
 	close(fd);
 	
 	//Verif sudoku
 	int count = 0;
-	while(s[count] != '\0')
+	while(s[count] != 0)
 	{
-		if(s[count] != '.' & s[count] != ' ' & s[count] != '\n' & !(s[count] >= '0' && s[count] <= '9'))
+		if(s[count] != ' ' && !(s[count] >= '0' && s[count] <= '9'))
 		{
 			printf("Wrong Sudoku!\n");
 			exit(1);
@@ -174,7 +179,7 @@ void error(char *av, char s[])
 
 int main(int ac, char **av)
 {
-	char s[109];
+	char s[82];
 
 	if(ac != 2)
 	{
