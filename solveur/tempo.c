@@ -21,7 +21,7 @@ int is_line_ok(int nb, int line, char s[])
 	int pos = line * 9;
 	int lim = pos + 9;
 
-	//cette fonction vérifie que le nombre n'est pas déjà dans la ligne 
+	//Cette fonction vérifie que le nombre n'est pas déjà dans la ligne 
 	while(pos < lim)
 	{
 		if(s[pos] == nb) return 0;
@@ -36,7 +36,7 @@ int is_col_ok(int nb, int col, char s[])
 	int pos = col;
 	int lim = 81;
 
-	//cette fonction vérifie que le nombre n'est pas déjà dans la colonne
+	//Cette fonction vérifie que le nombre n'est pas déjà dans la colonne
 	while(pos < lim)
 	{
 		if(s[pos] == nb) return 0;
