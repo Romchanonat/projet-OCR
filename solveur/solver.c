@@ -269,7 +269,7 @@ int main(int argc, char** argv)
 	sudoku(0, is_empty(0,s), s);
 
 	//Display result
-	print_sudoku(s);
+	//print_sudoku(s);
 
 	//Put the result into a file
 	into_file(s);
