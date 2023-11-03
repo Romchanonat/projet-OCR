@@ -2,6 +2,7 @@
 #include <math.h>
 #include <stdbool.h>
 #include <stdio.h>
+#include "help.h"
 #include "SDL2/SDL.h"
 
 Image *create(int height, int width)
@@ -13,7 +14,7 @@ Image *create(int height, int width)
     image->pixels = malloc(sizeof(Pixel *) * width + 1);
 
     if (image->pixels == NULL)
-        errx(1, "Error when allocating memory in create_image.");
+      perror("Error when allocating memory in create_image.");
 
     for (int x = 0; x < width; x++)
         image->pixels[x] = malloc(sizeof(Pixel) * height + 1);
@@ -23,9 +24,9 @@ Image *create(int height, int width)
 
     if (image->surface == NULL)
     {
-        const char *errm = SDL_GetError();
-        errx(-1, errm);
+      perror("Error creating surface");
+      exit(EXIT_FAILURE);
     }
-
+    
     return image;
 }
