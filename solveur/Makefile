@@ -6,7 +6,7 @@ CFLAGS = -Wall -Wextra
 LDFLAGS =
 LDLIBS =
 
-SRC = main.c 
+SRC = solver.c 
 OBJ = ${SRC:.txt=.result}
 DEP = ${SRC:.c=.d}
 

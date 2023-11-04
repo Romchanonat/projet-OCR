@@ -17,6 +17,27 @@
 
 
 
+void print_sudoku(char s[]) {
+    char display[132];
+    int count = 0;
+    int pos = 0;
+
+    while (count < 132) {
+        if (count != 0) {
+            
+        }
+
+        display[pos] = s[count];
+
+        pos += 1;
+        count += 1;
+    }
+
+    display[131] = '\0'; 
+    printf("%s\n", display);
+}
+
+
 
 int is_line_ok(int nb, int line, char s[])
 {
@@ -107,7 +128,9 @@ int sudoku(int pos, int empty, char s[])
 		{
 			if(is_line_ok(sol[sol_pos], pos / 12, s) == 1 && is_col_ok(sol[sol_pos], pos % 12, s) == 1 && is_square_ok(sol[sol_pos], pos /12, pos % 12, s) == 1)
 			{
+			  
 				s[pos] = sol[sol_pos];
+				
 				if(sudoku(pos + 1, is_empty(pos + 1, s), s) == 0)
 				  {
 				    return 0;
@@ -125,6 +148,7 @@ int sudoku(int pos, int empty, char s[])
 		    return -1;
 		  }
 	}
+	return -1;
 }
 
 /*
@@ -160,27 +184,6 @@ void print_sudoku(char s[])
 	display[131] = 0;
 	printf("%s\n", display);
 	}*/
-
-
-void print_sudoku(char s[]) {
-    char display[132];
-    int count = 0;
-    int pos = 0;
-
-    while (count < 132) {
-        if (count != 0) {
-            
-        }
-
-        display[pos] = s[count];
-
-        pos += 1;
-        count += 1;
-    }
-
-    display[131] = '\0'; 
-    printf("%s\n", display);
-}
 
 
 
@@ -269,7 +272,7 @@ int main(int argc, char** argv)
 	sudoku(0, is_empty(0,s), s);
 
 	//Display result
-	//print_sudoku(s);
+	print_sudoku(s);
 
 	//Put the result into a file
 	into_file(s);
