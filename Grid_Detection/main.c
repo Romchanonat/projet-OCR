@@ -19,11 +19,13 @@ int main (int argc, char** argv)
     SDL_Surface* surface = SDL_ConvertSurfaceFormat(image,SDL_PIXELFORMAT_RGB888,0);
     SDL_FreeSurface(image);
     
+    
+    //CutGrid(surface);
     //do the HoughTransform of the grid
     HoughTransform(surface);
     
     //cut the grid in 9x9 Piece
-    CutGrid(surface);
+    
     
 	SDL_FreeSurface(surface);
     
